@@ -14,12 +14,11 @@ export const AuthenticationContextProvider = ({ children }) => {
     if (usr) {
       setUser(usr);
       setIsLoading(false);
-    } 
+    }
   });
 
   const onLogin = (email, password) => {
     setIsLoading(true);
-    console.log(isLoading)
     loginRequest(email, password)
       .then((u) => {
         setUser(u);
@@ -30,15 +29,16 @@ export const AuthenticationContextProvider = ({ children }) => {
         setError(e.toString());
       });
   };
-  
-   const onLogout = () => {
+
+  const onLogout = () => {
     firebase
       .auth()
       .signOut()
       .then(() => {
         setUser(null);
         setError(null);
-      });  };
+      });
+  };
   return (
     <AuthenticationContext.Provider
       value={{

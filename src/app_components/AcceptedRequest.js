@@ -1,26 +1,31 @@
-import * as React from 'react';
-import { Text, View, StyleSheet, ScrollView  } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getPerformance } from '../app_services/firebase.services/firebase.service.alert'
+export const AcceptedRequest = () => {
+  const [list, setList] = useState(getPerformance("Accept"))
+  const history = list;
 
-export default function AcceptedRequest() {
   return (
     <View style={styles.container}>
       <Text style={styles.head}>Accepted Requests</Text>
       <ScrollView>
-      <Text style={styles.list}>
-      
-      </Text>
-      </ScrollView >
+        {
+          history ? (history.map(d => (
+            <Text style={styles.list}>
+              {'\u2B24'}  {d}
+            </Text>))) : (<Text style={styles.list}>
+            </Text>)}
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:'rgba(255,255,255,.1)',
-    width:'100%',
-    height:'100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,.1)',
+    width: '100%',
+    height: '100%',
     padding: 24,
     shadowColor: "#000",
     shadowOffset: {
@@ -34,13 +39,13 @@ const styles = StyleSheet.create({
   head: {
     color: 'green',
     alignItems: 'center',
-    justifyContent: 'center',
+    textAlign: 'center',
     fontWeight: 'bold',
+    marginBottom: 6,
   },
   list: {
-    margin: 24,
-    marginTop: 0,
+    marginTop: 12,
     fontSize: 14,
-    textAlign: 'center',
+    fontWeight: 'bold'
   },
 });

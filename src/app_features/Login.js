@@ -26,7 +26,6 @@ import { colors } from '../app_utils/colors';
 
 import { AuthenticationContext } from '../app_services/authentication/authentication.context'
 export const Login = () => {
-  //Hard coding?
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { onLogin, error, isLoading } = useContext(AuthenticationContext);
