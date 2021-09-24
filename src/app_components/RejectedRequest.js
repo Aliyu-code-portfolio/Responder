@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
-import { getPerformance } from '../app_services/firebase.services/firebase.service.alert'
+import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { getPerformance, getTeam } from '../app_services/firebase.services/firebase.service.alert'
 
 export default function RejectedRequest() {
-  const [list, setList] = useState(getPerformance("Reject"))
-  const history = list;
+  const [list, setList] = useState(null)
+
+  const setHistory = (list) => {
+    setList(list)
+    console.log(list)
+  }
+
+  useEffect(() => {
+    getPerformance("Reject", getTeam(), setHistory)
+  }, [])
+
   return (
     <View style={styles.container}>
       <Text style={styles.head}>Rejected Requests</Text>
-      <ScrollView>
-        {
-          history ? (history.map(d => (
-            <Text style={styles.list}>
-              {'\u2B24'}  {d}
-            </Text>))) : (<Text style={styles.list}>
-            </Text>)}
-      </ScrollView >
+      <View style={{ flex: 1, flexGrow: 1 }}>
+        <FlatList
+          data={list}
+          renderItem={({ item }) => {
+            return (
+              <Text style={styles.list}>{'\u2022 '}{item}</Text>
+            )
+          }
+          }
+          contentContainerStyle={{
+            flexGrow: 1,
+          }}
+        />
+      </View>
     </View>
   );
 }
@@ -36,6 +51,7 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   head: {
+    textDecorationLine: 'underline',
     color: 'red',
     alignItems: 'center',
     textAlign: 'center',
@@ -43,9 +59,9 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   list: {
+    color: 'red',
     marginTop: 12,
     fontSize: 14,
-    fontWeight: 'bold'
   },
 
 });

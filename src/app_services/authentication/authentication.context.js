@@ -1,4 +1,5 @@
 import React, { useState, createContext } from "react";
+import { Alert } from 'react-native'
 import * as firebase from "firebase";
 
 import { loginRequest } from "./authentication.service";
@@ -31,14 +32,33 @@ export const AuthenticationContextProvider = ({ children }) => {
   };
 
   const onLogout = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        setUser(null);
-        setError(null);
-      });
-  };
+    Alert.alert(
+
+      "Logout?",
+      "Confirm logout",
+      [
+        {
+          text: "Cancel",
+          //save action to data base
+          style: "cancel"
+        },
+        {
+          text: "Confirm",
+          //save action to database
+          onPress: () => {
+            firebase
+              .auth()
+              .signOut()
+              .then(() => {
+                setUser(null);
+                setError(null);
+              });
+          }
+        }
+      ]
+    );
+
+  }
   return (
     <AuthenticationContext.Provider
       value={{

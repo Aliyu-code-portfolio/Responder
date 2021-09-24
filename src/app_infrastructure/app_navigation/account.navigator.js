@@ -1,13 +1,13 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { ThemeProvider } from "styled-components/native";
 
 import { AuthenticationContext } from "../../app_services/authentication/authentication.context"
-import {Login} from '../../app_features/Login';
-import {AppNavigator} from './app.navigation'
+import { Login } from '../../app_features/Login';
+import { AppNavigator } from './app.navigation'
 
-import {theme} from '../theme'
+import { theme } from '../theme'
 
-export const AccountNavigator =()=>{
+export const AccountNavigator = () => {
   const { isAuthenticated } = useContext(AuthenticationContext);
   return (
     <ThemeProvider theme={theme}>

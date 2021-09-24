@@ -1,22 +1,34 @@
-import React, { useState } from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getPerformance } from '../app_services/firebase.services/firebase.service.alert'
-export const AcceptedRequest = () => {
-  const [list, setList] = useState(getPerformance("Accept"))
-  const history = list;
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, FlatList, ScrollView } from 'react-native';
+//import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getPerformance, getTeam } from '../app_services/firebase.services/firebase.service.alert'
+export const AcceptedRequest = ({ reload }) => {
+  const [list, setList] = useState(null)
+
+  const setHistory = (list) => {
+    setList(list)
+  }
+
+  useEffect(() => {
+    getPerformance("Accept", getTeam(), setHistory)
+  }, [reload])
 
   return (
     <View style={styles.container}>
       <Text style={styles.head}>Accepted Requests</Text>
-      <ScrollView>
-        {
-          history ? (history.map(d => (
-            <Text style={styles.list}>
-              {'\u2B24'}  {d}
-            </Text>))) : (<Text style={styles.list}>
-            </Text>)}
-      </ScrollView>
+      <FlatList
+        data={list}
+        renderItem={({ item }) => {
+          return (
+            <Text style={styles.list}>{'\u2022 '}{item}</Text>
+          )
+        }
+        }
+        contentContainerStyle={{
+          flexGrow: 1,
+        }}
+      />
+
     </View>
   );
 }
@@ -37,6 +49,7 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   head: {
+    textDecorationLine: 'underline',
     color: 'green',
     alignItems: 'center',
     textAlign: 'center',
@@ -44,8 +57,8 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   list: {
+    color: 'green',
     marginTop: 12,
     fontSize: 14,
-    fontWeight: 'bold'
   },
 });

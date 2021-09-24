@@ -4,7 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from "@react-navigation/native";
 
 import { Chat } from '../../app_screens/chat.screen'
-import { Dashboard } from '../../app_screens/dashboard.screen'
+//import { Dashboard } from '../../app_screens/dashboard.screen'
+import { HomeNavigation } from './home.navigation'
 
 
 const Tab = createBottomTabNavigator()
@@ -30,7 +31,7 @@ export const AppNavigator = () => (
         activeTintColor: 'red',
         inactiveTintColor: 'gray',
       }}>
-      <Tab.Screen name="Dashboard" component={Dashboard} />
+      <Tab.Screen name="Dashboard" component={HomeNavigation} />
       <Tab.Screen name="Chat" component={Chat} options={{ header: () => null }} />
     </Tab.Navigator>
   </NavigationContainer>

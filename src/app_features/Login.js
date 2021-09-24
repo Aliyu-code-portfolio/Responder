@@ -33,12 +33,12 @@ export const Login = () => {
   return (
     <SafeArea>
       <ImageBackground
-        source={require("../../assets/bdimg.jpg")}
+        source={require("../../assets/emcy.png")}
         style={styles.containerTop}>
         <View style={styles.container}>
           <View style={styles.textContainer}>
             <Title>RESPONDER</Title>
-            <Subtitle>LAESNA'S response system</Subtitle>
+            <Subtitle>LAESNA'S Response System</Subtitle>
           </View>
           <AccountContainer>
             <AuthInput
@@ -69,7 +69,33 @@ export const Login = () => {
                 <AuthButton
                   icon="lock-open-outline"
                   mode="contained"
-                  onPress={() => onLogin(email, password)}
+                  onPress={() => {
+                    if (email == 'security@abu.edu.ng' || email == 'medical@abu.edu.ng' || email == 'fire@abu.edu.ng') {
+                      onLogin(email, password)
+                    }
+                    else {
+                      Alert.alert(
+
+                        "Unauthorized Login ",
+                        " Opps, looks like you are not an Admin, Please login with the client app",
+                        [
+                          {
+                            text: "Ok",
+                            //save action to data base
+                            onPress: () => {
+
+                            },
+                            style: "cancel"
+                          },
+
+                        ]
+                      );
+
+
+                    }
+                  }
+
+                  }
                 >
                   Login
                 </AuthButton>
@@ -80,7 +106,7 @@ export const Login = () => {
           </AccountContainer>
         </View>
       </ImageBackground>
-    </SafeArea>
+    </SafeArea >
   );
 }
 
