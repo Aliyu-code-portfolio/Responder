@@ -11,9 +11,13 @@ All history of Emergency requests are displayed on this screen.
 
 ## New Emergency Pop-Up
 <img src="https://user-images.githubusercontent.com/88856370/183752031-4e03f565-c446-4d77-a3db-46aedf6f7281.jpg" width="200" height="450"/>
-An Alert dialog is displayed and a loud sound rings upon recieving a new emergency request from a LAESNA User
+An Alert dialog is displayed and a loud sound rings when recieving a new emergency request from a LAESNA User
 
+## Information of Emergency Request
+<img src="https://user-images.githubusercontent.com/88856370/183843021-d0be4d4f-8398-412b-99ab-653cf67265b9.jpg" width="200" height="450"/>
+A dispatcher can view details of a User that request for help which can be pass on to the emergence team specified
 
-
-
+## Sending ETA
+<img src="https://user-images.githubusercontent.com/88856370/183845734-641c7025-a8fd-4ea6-b681-e2de84081128.jpg" width="200" height="450"/>
+Sending Expected Time of Arrival to the user is required to accept a request.
 
